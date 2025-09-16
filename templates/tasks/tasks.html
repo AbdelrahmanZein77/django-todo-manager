@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<a href="{% url 'logout' %}">Logout</a>
+<hr>
+
+{% if error %}
+    <p style="color:red;">{{ error }}</p>
+    {% endif %}
+    <form method="POST">
+        {% csrf_token %}
+
+        <input type="text" name="title" placeholder= 'title'> <br>
+        <textarea name="description" placeholder='description'></textarea> <br>
+        <input type="submit" value="save"> <br>
+
+    </form>
+
+    <h3>you have a {{count}} tasks </h3>
+    {% for x in tasks %}
+        <p>
+        <b> title:</b> {{x.title}}<br>
+        <b>description:</b> {{x.description}}<br>
+        <b>complated:</b> {{x.complated}} 
+        </p>
+        <a href="{% url 'Toggle_task' x.id %}">toggle</a> <b>|</b>
+        <a href="{% url 'update_task' x.id %}">update</a> <b>|</b>
+        <a href="{% url 'delelte_task' x.id %}">delete</a> 
+
+        <p>_________________________________________________</p>
+    {% empty %}
+        <p>no tasks found</p>
+    {% endfor %}
+
+</body>
+</html>

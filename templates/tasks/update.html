@@ -1,0 +1,14 @@
+<h1>UPDATE TASK</h1>
+<form method="POST">
+    {% csrf_token %} 
+        
+        <input type="text" name="title" value= "{{task.title}}" placeholder= 'title'> <br>
+        <textarea name="description" placeholder="description">{{ task.description }}</textarea> <br>
+        <input type="checkbox" name="complated" {% if task.complated %}checked{% endif %}> <br>
+        <input type="submit" value="save"> <br>
+
+</form>
+
+{% if error %}
+    <p> {{error}} </p>
+{% endif %}
